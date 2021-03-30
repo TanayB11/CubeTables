@@ -26,4 +26,18 @@ export const actions = {
         console.log(err)
       })
   },
+  autoSignIn({ commit }) {
+    this.$axios({
+      method: 'post',
+      url: `${process.env.APIBASEURL}/user`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        // commit('updateUserInfo', res.data)
+        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
 }

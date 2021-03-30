@@ -4,12 +4,11 @@ var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 
-// TODO: Add cors
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config()
 var cors = require('cors')
 
-mongoose.connect(process.env.MONGOOSEURL, {
+mongoose.connect(process.env.MONGOOSE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -58,6 +57,18 @@ passport.deserializeUser(function(id, done) {
     done(null, user)
   })
 })
+
+var session = require('express-session')
+var MongoStore = require('connect-mongo')
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGOOSE_URL,
+      mongooseConnection: mongoose.connection,
+    }),
+}))
 
 app.use(passport.initialize())
 app.use(passport.session())

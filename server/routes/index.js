@@ -4,6 +4,7 @@ var router = express.Router();
 var { body } = require('express-validator')
 var passport = require('passport')
 
+const { authMiddleware } = require('../middlewares/authMiddleware')
 const userController = require('../controllers/userController')
 
 /* GET home page. */
@@ -20,6 +21,15 @@ router.post('/api/signup', [
   ], userController.signUp)
 
 router.post('/api/signin', passport.authenticate('local'), (req, res, next) => {
+  res.send(req.user)
+})
+
+router.post('/api/signout', authMiddleware, (req, res, next) => {
+  req.logout()
+  res.sendStatus(200)
+})
+
+router.get('/api/user', authMiddleware, (req, res, next) => {
   res.send(req.user)
 })
 

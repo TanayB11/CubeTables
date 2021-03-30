@@ -30,7 +30,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    ...mapActions('auth', ['callSignIn'])
+    ...mapActions('auth', ['callSignIn', 'autoSignIn'])
   },
 })
 </script>
