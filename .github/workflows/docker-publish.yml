@@ -15,8 +15,8 @@ on:
       - master
 
 env:
-  CLIENT_IMAGE_NAME: cubetables_client
-  SERVER_IMAGE_NAME: cubetables_server
+  CLIENT_IMAGE_NAME: client
+  SERVER_IMAGE_NAME: server
 
 jobs:
   # Run test build
