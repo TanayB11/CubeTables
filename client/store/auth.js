@@ -40,4 +40,18 @@ export const actions = {
         console.log(err)
       })
   },
+  callSignOut({ commit }) {
+    this.$axios({
+      method: 'post',
+      url: `${process.env.API_BASEURL}/signout`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        commit('updateUserInfo', '')
+        this.$router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
 }
