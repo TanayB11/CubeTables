@@ -1,17 +1,23 @@
-# build stage
-FROM node:lts-alpine as build-stage
+FROM node:lts-alpine
 
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY package*.json ./
-RUN npm install
+# RUN apk update && apk upgrade
+# RUN apk add git
+
+COPY package*.json .
+
+RUN npm install --only-prod --silent
 
 COPY . .
 
-ENV NODE_ENV="production"
-ENV API_BASEURL="https://cubetables.tanaybiradar.com/api"
+RUN npm run generate
 
-RUN npm run build
+EXPOSE 8080
 
-CMD ["nuxt", "start"]
+ENV NUXT_HOST=0.0.0.0
+ENV NUXT_PORT=8080
+
+# start the app
+CMD [ "npm", "start" ]

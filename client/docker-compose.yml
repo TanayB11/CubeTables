@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  client:
+    container_name: cubetables_client
+    image: client
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
