@@ -32,5 +32,8 @@ export default Vue.extend({
   methods: {
     ...mapActions('auth', ['callSignIn', 'autoSignIn'])
   },
+  mounted() {
+    this.autoSignIn()
+  }
 })
 </script>

@@ -16,7 +16,7 @@ export const actions = {
   callSignIn({ commit }, credentials) {
     this.$axios({
       method: 'post',
-      url: `${process.env.APIBASEURL}/signin`,
+      url: `${process.env.API_BASEURL}/signin`,
       data: credentials,
     })
       .then((res) => {
@@ -28,13 +28,13 @@ export const actions = {
   },
   autoSignIn({ commit }) {
     this.$axios({
-      method: 'post',
-      url: `${process.env.APIBASEURL}/user`,
+      method: 'get',
+      url: `${process.env.API_BASEURL}/user`,
       withCredentials: true,
     })
       .then((res) => {
-        // commit('updateUserInfo', res.data)
-        console.log(res.data)
+        commit('updateUserInfo', res.data)
+        this.$router.push('/dashboard')
       })
       .catch((err) => {
         console.log(err)
