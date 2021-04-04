@@ -3,7 +3,7 @@
 tmux new -s cubetables -d
 
 # working window
-tmux send-keys 'cd client && vim' C-m
+tmux send-keys 'vim' C-m
 
 # client dev window
 tmux split-window -v -t cubetables
